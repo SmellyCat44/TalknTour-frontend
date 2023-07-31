@@ -2,7 +2,7 @@
   <div>
     <h1>Query Page</h1>
     <el-spinner v-if="isLoading" type="fading-circle" class="spinner"></el-spinner>
-    <el-table :data="restaurants" style="width: 80%; margin:auto; margin-top: 25px; margin-bottom: 20px; border-radius: 10px;" :header-cell-style="{background:'#69e8bb',color:'#535252'}">
+    <el-table :data="restaurants" style="width: 80%; margin:auto; margin-top: 20px; margin-bottom: 20px; border-radius: 10px;" :header-cell-style="{background:'#69e8bb',color:'#535252'}">
       <el-table-column
         prop="name"
         label="Name"
@@ -113,6 +113,7 @@ methods: {
 h1 {
   text-align: center;
   color: #22f2c5;
+  margin-top: 50px;
 }
 .el-table {
   margin-top: 20px;

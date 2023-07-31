@@ -3,7 +3,7 @@
     <nav>
       <div class="nav-container">
         <div class="logo">
-          <h1>TalknTour</h1>
+          <img src="./assets/mp.png" alt="Microphone" /><h1>TalknTour</h1>
         </div>
       <ul>
         <li><router-link to="/">Home</router-link></li>
@@ -120,4 +120,13 @@ nav a:hover {
     .footer p {
       margin: 0;
     }
+
+.logo img,
+.logo h1 {
+  display: inline-block;
+}
+  img{
+    width: 25px;
+    height: 25px;
+  }
 </style>

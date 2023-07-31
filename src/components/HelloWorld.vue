@@ -11,7 +11,10 @@
       </div>
 
       <div class="buttons-container">
-      <button class="custom-button" @click="startRecording">Start</button>
+      <button class="custom-button" @click="startRecording">
+        <img src="../assets/mp.png" alt="Microphone" />
+      </button>
+      <!-- <button class="record-button" @click="toggleRecording">{{ recording ? 'Stop' : 'Start' }}</button> -->
       <button class="custom-button" @click="stopRecording">Stop</button>
       </div>
 
@@ -34,6 +37,7 @@ export default {
       isRecording: false,
       response: '', // 响应结果
       searchQuery: '',
+      recognizer: null,
     };
   },
 
@@ -96,6 +100,37 @@ export default {
         });
       }
     },
+    toggleRecording() {
+      if (!('webkitSpeechRecognition' in window)) {
+        // Speech Recognition API not supported, handle it
+        alert('Speech recognition not supported');
+        return;
+      }
+      if (!this.recognition) {
+        this.recognition = new webkitSpeechRecognition();
+        this.recognition.continuous = true;
+        this.recognition.interimResults = false;
+        this.recognition.lang = 'en-US'; // set your language
+        this.recognition.onend = () => {
+          this.recording = false;
+          // Add code to process results here
+          this.recognition.onresult = (event) => {
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript;
+            console.log('Voice command: ', command);
+          };
+
+          console.log('Speech recognition stopped');
+        };
+      }
+      if (this.recording) {
+        this.recognition.stop();
+      } else {
+        this.recognition.start();
+      }
+      this.recording = !this.recording;
+    },
+    
 
   },
 };
@@ -148,7 +183,7 @@ a {
   background-color: #0ABAB5; 
   color: white; 
   border: none; 
-  border-radius: 20px;
+  border-radius: 35px;
   cursor: pointer;
 }
 .custom-button:hover {
@@ -182,5 +217,9 @@ a {
 .search-button:hover {
   background-color: #089A95;
 }
+img {
+    width: 40px;
+    height: 40px;
+  }
 </style>
 
