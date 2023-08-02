@@ -113,7 +113,7 @@ methods: {
 h1 {
   text-align: center;
   color: #22f2c5;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 .el-table {
   margin-top: 20px;
